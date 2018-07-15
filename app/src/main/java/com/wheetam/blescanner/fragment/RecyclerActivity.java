@@ -3,6 +3,7 @@ package com.wheetam.blescanner.fragment;
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -35,6 +36,8 @@ import com.wheetam.blescanner.service.BroadcastService;
 
 public class RecyclerActivity extends Fragment implements SimpleScanCallback{
     private final static String TAG = RecyclerActivity.class.getName();
+    private static final int IDX_RSSI = 2; // 2,3
+    private static final int IDX_TX = 16; // 16,17
 
     Recycler_items sAdapter;
     List<BLEDevice> mDevices = new ArrayList<BLEDevice>();
@@ -42,19 +45,14 @@ public class RecyclerActivity extends Fragment implements SimpleScanCallback{
 
     private Handler mHandler;
     private BleScanner mBleScanner;
-    private static final int REQUEST_ENABLE_BT = 1;
-    // Stops scanning after 15 seconds.
-    private static final long SCAN_PERIOD = 15000;
+    // Stops scanning after 30 minutes.
+    private static final long SCAN_PERIOD = 1800 * 1000;
     private boolean mScanning = false;
 
     RecyclerView rvDevices;
     Button scanButton;
 
     private BLEBroadcastReceiver mMessageReceiver = new BLEBroadcastReceiver();
-
-    public RecyclerActivity(){
-
-    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -78,7 +76,6 @@ public class RecyclerActivity extends Fragment implements SimpleScanCallback{
                 mBleScanner = null;
                 getActivity().stopService(new Intent(getActivity().getApplicationContext(), BroadcastService.class));
 
-
             }
         }, SCAN_PERIOD);
 
@@ -90,8 +87,6 @@ public class RecyclerActivity extends Fragment implements SimpleScanCallback{
 
         mBleScanner.startBleScan(); // factory for scanner version
         getActivity().startService(new Intent(getActivity().getApplicationContext(), BroadcastService.class));
-
-
     }
 
     @Nullable
@@ -130,6 +125,7 @@ public class RecyclerActivity extends Fragment implements SimpleScanCallback{
         scanButton.setText(R.string.Scanning);
 //        scanButton.setBackground(getResources().getDrawable(R.drawable.circle_button2));
 //        scanButton.setTextColor(getResources().getColor(R.color.gray));
+//        scanButton.setTextColor(Color.GRAY);
         scanButton.setClickable(false);
     }
 
@@ -140,7 +136,6 @@ public class RecyclerActivity extends Fragment implements SimpleScanCallback{
         scanButton.setClickable(true);
 //        scanButton.setBackground(getResources().getDrawable(R.drawable.circle_button));
     }
-
 
     @Override
     public void onStart() {
@@ -175,18 +170,32 @@ public class RecyclerActivity extends Fragment implements SimpleScanCallback{
     public void onBleScan(BluetoothDevice device, int rssi, byte[] scanRecord) {
         Log.d("TAG", "onBleScan callback reached on UI thread :" + "device: " + device + " rssi: " + rssi + " scanR: " + scanRecord);
         BLEDevice d = new BLEDevice(device.getName(), rssi, scanRecord);
-        if (!deviceMap.containsKey(device.getName())) {
+        String deviceName=device.getName();
+        String dataForBearing = d.getResData();   // BearingActivity로 보낼 문자열
 
-            deviceMap.put(device.getName(), d);
-            mDevices.add(d);
-            sAdapter.notifyDataSetChanged();
-        } else {
-            //in 15 seconds the rssi can change
-            mDevices.remove(deviceMap.get(device.getName()));
-            deviceMap.put(device.getName(), d);
-            mDevices.add(d);
-            sAdapter.notifyDataSetChanged();
+        // device name filtering
+        if(deviceName.contains("POlar")){
+            // POlar를 포함한 이름을 가진 디바이스만 recycler view에 추가
+            if (!deviceMap.containsKey(deviceName)) {
+                deviceMap.put(deviceName, d);
+                mDevices.add(d);
+                sAdapter.notifyDataSetChanged();
+            } else {
+                //in 15 seconds the rssi can change
+                mDevices.remove(deviceMap.get(deviceName));
+                deviceMap.put(deviceName, d);
+                mDevices.add(d);
+                sAdapter.notifyDataSetChanged();
+            }
+
+            // bearing activity에 디바이스 이름 먼저 보냄
+            BearingActivity.tv_north_title.setText(deviceName);
+
+            //같은 데이터를 bearing activity에도 추가 (rssi, tx, polar 번호)
+            BearingActivity.tv_north_rssi.setText("RSSI : " + dataForBearing.charAt(IDX_RSSI)+dataForBearing.charAt(IDX_RSSI+1) + "dBm");
+            BearingActivity.tv_north_tx.setText("TX : " + dataForBearing.charAt(IDX_TX)+dataForBearing.charAt(IDX_TX+1));
         }
+
     }
 
     @Override

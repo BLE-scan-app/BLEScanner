@@ -33,7 +33,7 @@ public class BleScanner {
     }
 
     public abstract static class BaseBleScanner {
-        public final static long defaultTimeout = 15 *1000;
+        public final static long defaultTimeout = 1800 *1000;
         public boolean isScanning;
 
         public abstract void onStartBleScan();

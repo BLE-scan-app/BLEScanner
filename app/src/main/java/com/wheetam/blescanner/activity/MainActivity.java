@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.provider.SyncStateContract;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
@@ -27,8 +26,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wheetam.blescanner.R;
+import com.wheetam.blescanner.fragment.BearingActivity;
 import com.wheetam.blescanner.fragment.RecyclerActivity;
-import com.wheetam.blescanner.activity.Constants;
 
 import java.util.ArrayList;
 import java.util.HashMap;
