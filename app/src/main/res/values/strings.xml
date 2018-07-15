@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">BLEScanner</string>
+    <string name="tab_txt_dev">Devices</string>
+    <string name="tab_txt_dir">Directions</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <string name="bt_not_enabled_leaving">User declined to enable Bluetooth, exiting Bluetooth Advertisements.</string>
+    <string name="bt_not_supported">Bluetooth is not supported on this device.</string>
+    <string name="bt_ads_not_supported">Bluetooth Advertisements are not supported on this device.</string>
+    <string name="error_bluetooth_not_supported">Bluetooth not supported.</string>
+
+    <!-- Menu items -->
+    <string name="Scanning">Scanning</string>
+    <string name="StartScan">Start Scan</string>
+    <string name="bledevice">BLEDevice</string>
+    <string name="rssi">RSSI</string>
+    <string name="record">Record</string>
+    <string name="local_service_stopped">broadcast service stopped</string>
+    <string name="local_service_started">broadcast service started</string>
+    <string name="local_service_label">broadcast service notification</string>
+
+
+
+</resources>
