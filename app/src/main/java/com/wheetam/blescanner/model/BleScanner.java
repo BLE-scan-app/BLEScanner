@@ -17,9 +17,6 @@ public class BleScanner {
         }
     }
 
-
-
-
     public boolean isScanning(){
         return bleScanner.isScanning;
     }

@@ -1,4 +1,4 @@
-package com.wheetam.blescanner;
+package com.wheetam.blescanner.activity;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.wheetam.blescanner.R;
 
 public class BearingActivity extends Fragment{
 

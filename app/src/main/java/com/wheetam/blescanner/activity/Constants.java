@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.wheetam.blescanner;
+package com.wheetam.blescanner.activity;
 
 import android.os.ParcelUuid;
 

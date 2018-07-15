@@ -1,8 +1,10 @@
-package com.wheetam.blescanner;
+package com.wheetam.blescanner.activity;
 
 import android.Manifest;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -23,6 +25,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.wheetam.blescanner.R;
+import com.wheetam.blescanner.fragment.RecyclerActivity;
+import com.wheetam.blescanner.activity.Constants;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -87,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("permissions","Prompt user to turn on Bluetooth");
                 // Prompt user to turn on Bluetooth (logic continues in onActivityResult()).
                 Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-                startActivityForResult(enableBtIntent, SyncStateContract.Constants.REQUEST_ENABLE_BT);
+                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
             }
         } else {
 
@@ -96,6 +102,18 @@ public class MainActivity extends AppCompatActivity {
             Log.e("app_errs","Bluetooth is not supported.");
         }
 
+        // Initializes a Bluetooth adapter.  For API level 18 and above, get a reference to
+        // BluetoothAdapter through BluetoothManager.
+        final BluetoothManager bluetoothManager =
+                (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
+        mBluetoothAdapter = bluetoothManager.getAdapter();
+
+        // Checks if Bluetooth is supported on the device.
+        if (mBluetoothAdapter == null) {
+            Toast.makeText(this, R.string.error_bluetooth_not_supported, Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
@@ -242,10 +260,10 @@ public class MainActivity extends AppCompatActivity {
     private void setupFragments() {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-        ScannerFragment scannerFragment = new ScannerFragment();
+//        ScannerFragment scannerFragment = new ScannerFragment();
         // Fragments can't access system services directly, so pass it the BluetoothAdapter
-        scannerFragment.setBluetoothAdapter(mBluetoothAdapter);
-        transaction.replace(R.id.scanner_fragment_container, scannerFragment);
+//        scannerFragment.setBluetoothAdapter(mBluetoothAdapter);
+        transaction.replace(R.id.tabDev, new RecyclerActivity());
 
 //        AdvertiserFragment advertiserFragment = new AdvertiserFragment();
 //        transaction.replace(R.id.advertiser_fragment_container, advertiserFragment);
@@ -278,6 +296,17 @@ public class MainActivity extends AppCompatActivity {
 //
 //        return super.onOptionsItemSelected(item);
 //    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
 
     /**
      * A placeholder fragment containing a simple view.
