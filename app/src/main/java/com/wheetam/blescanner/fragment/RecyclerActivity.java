@@ -38,6 +38,13 @@ public class RecyclerActivity extends Fragment implements SimpleScanCallback{
     private final static String TAG = RecyclerActivity.class.getName();
     private static final int IDX_RSSI = 2; // 2,3
     private static final int IDX_TX = 16; // 16,17
+    private static final int IDX_ANT = 0; // 0,1
+
+    // For ANT value filtering (Bearing)
+    private static final String EAST = "30";
+    private static final String WEST = "31";
+    private static final String SOUTH = "32";
+    private static final String NORTH = "33";
 
     Recycler_items sAdapter;
     List<BLEDevice> mDevices = new ArrayList<BLEDevice>();
@@ -111,7 +118,6 @@ public class RecyclerActivity extends Fragment implements SimpleScanCallback{
             }
         });
         rvDevices.setHasFixedSize(true);
-        //Recycler_items adapter = new Recycler_items(new String[]{"test 1", "test 2", "test 3","test 4", "test 5", "test 6"});
         rvDevices.setAdapter(sAdapter);
 
         LinearLayoutManager llm = new LinearLayoutManager(getActivity().getApplicationContext());
@@ -174,7 +180,7 @@ public class RecyclerActivity extends Fragment implements SimpleScanCallback{
         String dataForBearing = d.getResData();   // BearingActivity로 보낼 문자열
 
         // device name filtering
-        if(deviceName.contains("POlar")){
+        if(deviceName != null && deviceName.contains("POlar")){
             // POlar를 포함한 이름을 가진 디바이스만 recycler view에 추가
             if (!deviceMap.containsKey(deviceName)) {
                 deviceMap.put(deviceName, d);
@@ -188,15 +194,43 @@ public class RecyclerActivity extends Fragment implements SimpleScanCallback{
                 sAdapter.notifyDataSetChanged();
             }
 
-            // bearing activity에 디바이스 이름 먼저 보냄
-            BearingActivity.tv_north_title.setText(deviceName);
+            char AntValue = dataForBearing.charAt(IDX_ANT+1);
+            String rssi_ = ""+dataForBearing.charAt(IDX_RSSI)+dataForBearing.charAt(IDX_RSSI+1);
+            String tx_ = ""+dataForBearing.charAt(IDX_TX)+dataForBearing.charAt(IDX_TX+1);
 
-            //같은 데이터를 bearing activity에도 추가 (rssi, tx, polar 번호)
-            BearingActivity.tv_north_rssi.setText("RSSI : " + dataForBearing.charAt(IDX_RSSI)+dataForBearing.charAt(IDX_RSSI+1) + "dBm");
-            BearingActivity.tv_north_tx.setText("TX : " + dataForBearing.charAt(IDX_TX)+dataForBearing.charAt(IDX_TX+1));
-        }
+            // Set center first
+            // 데이터를 bearing activity에도 추가 (rssi, tx)
+            if(deviceName.equals("POlar0")){
+                BearingActivity.tv_center_rssi.setText("RSSI : " + rssi_ + "dBm");
+                BearingActivity.tv_center_tx.setText("TX : " + tx_);
+            }
+            else{ // For POlar1,2,3,4
+                switch(AntValue){
+                    case '1': // East
+                        BearingActivity.tv_east_title.setText(deviceName);
+                        BearingActivity.tv_east_rssi.setText("RSSI : " + rssi_ + "dBm");
+                        BearingActivity.tv_east_tx.setText("TX : " + tx_);
+                        break;
+                    case '2': // West
+                        BearingActivity.tv_west_title.setText(deviceName);
+                        BearingActivity.tv_west_rssi.setText("RSSI : " + rssi_ + "dBm");
+                        BearingActivity.tv_west_tx.setText("TX : " + tx_);
+                        break;
+                    case '3': // South
+                        BearingActivity.tv_south_title.setText(deviceName);
+                        BearingActivity.tv_south_rssi.setText("RSSI : " + rssi_ + "dBm");
+                        BearingActivity.tv_south_tx.setText("TX : " + tx_);
+                        break;
+                    case '4': // North
+                        BearingActivity.tv_north_title.setText(deviceName);
+                        BearingActivity.tv_north_rssi.setText("RSSI : " + rssi_ + "dBm");
+                        BearingActivity.tv_north_tx.setText("TX : " + tx_);
+                        break;
+                } //switch
+            } //else
+        } // if - POlar text filter
 
-    }
+    } // onBleScan method
 
     @Override
     public void onBleScanFailed(BleScanState scanState) {

@@ -1,6 +1,7 @@
 package com.wheetam.blescanner.activity;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
@@ -8,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
@@ -68,38 +70,44 @@ public class MainActivity extends AppCompatActivity {
         // primary sections of the activity.
         // 블루투스 권한 요청
         ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.BLUETOOTH},1);
-        getPermissions();           // 권한 검사
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN){
+            //getPermissions();           // 권한 검사
 
-        // Is Bluetooth supported on this device?
-        if (mBluetoothAdapter != null) {
+            // Is Bluetooth supported on this device?
+            if (mBluetoothAdapter != null) {
 
-            // Is Bluetooth turned on?
-            if (mBluetoothAdapter.isEnabled()) {
-
-                // Are Bluetooth Advertisements supported on this device?
-                if (mBluetoothAdapter.isMultipleAdvertisementSupported()) {
-
-                    // Everything is supported and enabled, load the fragments.
+                // Is Bluetooth turned on?
+                if (mBluetoothAdapter.isEnabled()) {
                     setupFragments();
 
+                    // Are Bluetooth Advertisements supported on this device?
+//                    if (mBluetoothAdapter.isMultipleAdvertisementSupported()) {
+//
+//                        // Everything is supported and enabled, load the fragments.
+//                        setupFragments();
+//
+//                    } else {
+//
+//                        // Bluetooth Advertisements are not supported.
+//                        showErrorText(R.string.bt_ads_not_supported);
+//                        Log.e("app_errs","Bluetooth Advertisements are not supported.");
+//                    }
                 } else {
-
-                    // Bluetooth Advertisements are not supported.
-                    showErrorText(R.string.bt_ads_not_supported);
-                    Log.e("app_errs","Bluetooth Advertisements are not supported.");
+                    Log.i("permissions","Prompt user to turn on Bluetooth");
+                    // Prompt user to turn on Bluetooth (logic continues in onActivityResult()).
+                    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                    startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
                 }
             } else {
-                Log.i("permissions","Prompt user to turn on Bluetooth");
-                // Prompt user to turn on Bluetooth (logic continues in onActivityResult()).
-                Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-            }
-        } else {
 
-            // Bluetooth is not supported.
-            showErrorText(R.string.bt_not_supported);
-            Log.e("app_errs","Bluetooth is not supported.");
+                // Bluetooth is not supported.
+                showErrorText(R.string.bt_not_supported);
+                Log.e("app_errs","Bluetooth is not supported.");
+            }
         }
+
+
+
 
         // Initializes a Bluetooth adapter.  For API level 18 and above, get a reference to
         // BluetoothAdapter through BluetoothManager.
@@ -128,62 +136,65 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void getPermissions(){
-        List<String> permissionsNeeded = new ArrayList<String>();
-
-        final List<String> permissionsList = new ArrayList<String>();
-        if (!addPermission(permissionsList, Manifest.permission.ACCESS_FINE_LOCATION))
-            Log.i("permissions","Show Location Permission needed");
-        permissionsNeeded.add("Show Location");
-
-        if (permissionsList.size() > 0) {
-            if (permissionsNeeded.size() > 0) {
-
-                // Need Rationale
-                String message = "App need access to " + permissionsNeeded.get(0);
-
-                for (int i = 1; i < permissionsNeeded.size(); i++)
-                    message = message + ", " + permissionsNeeded.get(i);
-
-                showMessageOKCancel(message,
-                        new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                requestPermissions(permissionsList.toArray(new String[permissionsList.size()]),
-                                        REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS);
-                            }
-                        });
-                return;
-            }
-            requestPermissions(permissionsList.toArray(new String[permissionsList.size()]),
-                    REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS);
-            return;
-        }
-
-        //Toast.makeText(this, "No new Permission Required- Launching App .You are Awesome!!", Toast.LENGTH_SHORT).show();
-
-    }
-
-    private boolean addPermission(List<String> permissionsList, String permission) {
-
-        if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
-            permissionsList.add(permission);
-            // Check for Rationale Option
-            if (!shouldShowRequestPermissionRationale(permission))
-                return false;
-        }
-        return true;
-    }
-
-    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
-        new AlertDialog.Builder(this)
-                .setMessage(message)
-                .setPositiveButton("OK", okListener)
-                .setNegativeButton("Cancel", null)
-                .create()
-                .show();
-    }
+//    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+//    private void getPermissions(){
+//        List<String> permissionsNeeded = new ArrayList<String>();
+//
+//        final List<String> permissionsList = new ArrayList<String>();
+//        if (!addPermission(permissionsList, Manifest.permission.ACCESS_FINE_LOCATION))
+//            Log.i("permissions","Show Location Permission needed");
+//        permissionsNeeded.add("Show Location");
+//
+//        if (permissionsList.size() > 0) {
+//            if (permissionsNeeded.size() > 0) {
+//
+//                // Need Rationale
+//                String message = "App need access to " + permissionsNeeded.get(0);
+//
+//                for (int i = 1; i < permissionsNeeded.size(); i++)
+//                    message = message + ", " + permissionsNeeded.get(i);
+//
+//                showMessageOKCancel(message,
+//                        new DialogInterface.OnClickListener() {
+//
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                requestPermissions(permissionsList.toArray(new String[permissionsList.size()]),
+//                                        REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS);
+//                            }
+//                        });
+//                return;
+//            }
+//            requestPermissions(permissionsList.toArray(new String[permissionsList.size()]),
+//                    REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS);
+//            return;
+//        }
+//
+//        //Toast.makeText(this, "No new Permission Required- Launching App .You are Awesome!!", Toast.LENGTH_SHORT).show();
+//
+//    }
+//
+//    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+//    private boolean addPermission(List<String> permissionsList, String permission) {
+//
+//        if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
+//            permissionsList.add(permission);
+//            // Check for Rationale Option
+//            if (!shouldShowRequestPermissionRationale(permission))
+//                return false;
+//        }
+//        return true;
+//    }
+//
+//    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+//    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
+//        new AlertDialog.Builder(this)
+//                .setMessage(message)
+//                .setPositiveButton("OK", okListener)
+//                .setNegativeButton("Cancel", null)
+//                .create()
+//                .show();
+//    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
@@ -229,20 +240,22 @@ public class MainActivity extends AppCompatActivity {
         switch (requestCode) {
             case Constants.REQUEST_ENABLE_BT:
 
+
                 if (resultCode == RESULT_OK) {
+                    setupFragments();
 
                     // Bluetooth is now Enabled, are Bluetooth Advertisements supported on
                     // this device?
-                    if (mBluetoothAdapter.isMultipleAdvertisementSupported()) {
-
-                        // Everything is supported and enabled, load the fragments.
-                        setupFragments();
-
-                    } else {
-
-                        // Bluetooth Advertisements are not supported.
-                        showErrorText(R.string.bt_ads_not_supported);
-                    }
+//                    if (mBluetoothAdapter.isMultipleAdvertisementSupported()) {
+//
+//                        // Everything is supported and enabled, load the fragments.
+//                        setupFragments();
+//
+//                    } else {
+//
+//                        // Bluetooth Advertisements are not supported.
+//                        showErrorText(R.string.bt_ads_not_supported);
+//                    }
                 } else {
 
                     // User declined to enable Bluetooth, exit the app.

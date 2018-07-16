@@ -19,17 +19,21 @@ public class BearingActivity extends Fragment{
     public static TextView tv_north_rssi;
     public static TextView tv_north_tx;
 
-    private static TextView tv_south_title;
-    private static TextView tv_south_rssi;
-    private static TextView tv_south_tx;
+    public static TextView tv_south_title;
+    public static TextView tv_south_rssi;
+    public static TextView tv_south_tx;
 
-    private static TextView tv_east_title;
-    private static TextView tv_east_rssi;
-    private static TextView tv_east_tx;
+    public static TextView tv_east_title;
+    public static TextView tv_east_rssi;
+    public static TextView tv_east_tx;
 
-    private static TextView tv_west_title;
-    private static TextView tv_west_rssi;
-    private static TextView tv_west_tx;
+    public static TextView tv_west_title;
+    public static TextView tv_west_rssi;
+    public static TextView tv_west_tx;
+
+    public static TextView tv_center_title;
+    public static TextView tv_center_rssi;
+    public static TextView tv_center_tx;
 
     private static final int IDX_RSSI = 2; // 2,3
     private static final int IDX_TX = 16; // 16,17
@@ -63,6 +67,11 @@ public class BearingActivity extends Fragment{
         tv_west_title = (TextView)rootView.findViewById(R.id.west);
         tv_west_rssi = (TextView)rootView.findViewById(R.id.west_rssi);
         tv_west_tx = (TextView)rootView.findViewById(R.id.west_tx);
+
+        // Center
+        tv_center_title = (TextView)rootView.findViewById(R.id.center);
+        tv_center_rssi = (TextView)rootView.findViewById(R.id.center_rssi);
+        tv_center_tx = (TextView)rootView.findViewById(R.id.center_tx);
 
         return rootView;
     }

@@ -10,15 +10,17 @@ public class BLEDevice {
     public static char[] resData;
     private final static String TAG = "hex_check";
 
-    private final static int IDX_ANT = 16;
-    private final static int IDX_RSSI = 18;
-    private final static int IDX_X1 = 20;
-    private final static int IDX_Y1 = 22;
-    private final static int IDX_Z1 = 24;
-    private final static int IDX_X2 = 26;
-    private final static int IDX_Y2 = 28;
-    private final static int IDX_Z2 = 30;
-    private final static int IDX_TX = 36;
+    private final static int IDX_SCAN_RESPONSE = 30;
+
+    private final static int IDX_ANT = 32;
+    private final static int IDX_RSSI = 34;
+    private final static int IDX_X1 = 36;
+    private final static int IDX_Y1 = 38;
+    private final static int IDX_Z1 = 40;
+    private final static int IDX_X2 = 42;
+    private final static int IDX_Y2 = 44;
+    private final static int IDX_Z2 = 46;
+    private final static int IDX_TX = 52;
 
     public BLEDevice(String name, int rssi, byte[] scanRecord){
         this.name = name;
@@ -47,16 +49,22 @@ public class BLEDevice {
         }
         String strHexChars = new String(hexChars);
 
-        for (int k = bytes.length; k < bytes.length*2; k++ ){
-            resData[k-bytes.length] = strHexChars.charAt(k);
+        for (int k = IDX_SCAN_RESPONSE; k < IDX_SCAN_RESPONSE+62; k++ ){
+            resData[k - IDX_SCAN_RESPONSE] = strHexChars.charAt(k);
         }
+        String chosenData = new String();
+//        for (int k = IDX_ANT; k < IDX_TX+2; k++){
+//            chosenData += resData[k];
+//        }
 
-        String chosenData = "";
+
         chosenData += "\nANT : "+resData[IDX_ANT]+resData[IDX_ANT+1]
                 + "\nRSSI : "+resData[IDX_RSSI]+resData[IDX_RSSI+1]+"dBm"
                 + "\nX : "+resData[IDX_X1]+resData[IDX_X1+1] + "\t\tY : "+resData[IDX_Y1]+resData[IDX_Y1+1] + "\t\tZ : "+resData[IDX_Z1]+resData[IDX_Z1+1]
                 + "\nX : "+resData[IDX_X2]+resData[IDX_X2+1] + "\t\tY : "+resData[IDX_Y2]+resData[IDX_Y2+1] + "\t\tZ : "+resData[IDX_Z2]+resData[IDX_Z2+1]
                 + "\nTX : "+resData[IDX_TX]+resData[IDX_TX+1];
+
+
 
 //        Log.i(TAG,"Advertising Data (" + advData.length + ") : "+ (new String(advData)));
         Log.i(TAG,"Scan Response Data (" + resData.length + ") : "+ (new String(resData)));
