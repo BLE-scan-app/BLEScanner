@@ -41,10 +41,10 @@ public class RecyclerActivity extends Fragment implements SimpleScanCallback{
     private static final int IDX_ANT = 0; // 0,1
 
     // For ANT value filtering (Bearing)
-    private static final String EAST = "30";
-    private static final String WEST = "31";
-    private static final String SOUTH = "32";
-    private static final String NORTH = "33";
+    private static final char WEST = '0';
+    private static final char SOUTH = '1';
+    private static final char NORTH = '4';
+    private static final char EAST = '5';
 
     Recycler_items sAdapter;
     List<BLEDevice> mDevices = new ArrayList<BLEDevice>();
@@ -52,8 +52,8 @@ public class RecyclerActivity extends Fragment implements SimpleScanCallback{
 
     private Handler mHandler;
     private BleScanner mBleScanner;
-    // Stops scanning after 30 minutes.
-    private static final long SCAN_PERIOD = 1800 * 1000;
+    // Stops scanning after 30 minutes. / 5 seconds.
+    private static final long SCAN_PERIOD = 15 * 1000;
     private boolean mScanning = false;
 
     RecyclerView rvDevices;
@@ -180,7 +180,7 @@ public class RecyclerActivity extends Fragment implements SimpleScanCallback{
         String dataForBearing = d.getResData();   // BearingActivity로 보낼 문자열
 
         // device name filtering
-        if(deviceName != null && deviceName.contains("POlar")){
+        if(deviceName != null && deviceName.contains("")){
             // POlar를 포함한 이름을 가진 디바이스만 recycler view에 추가
             if (!deviceMap.containsKey(deviceName)) {
                 deviceMap.put(deviceName, d);
@@ -200,31 +200,36 @@ public class RecyclerActivity extends Fragment implements SimpleScanCallback{
 
             // Set center first
             // 데이터를 bearing activity에도 추가 (rssi, tx)
-            if(deviceName.equals("POlar0")){
-                BearingActivity.tv_center_rssi.setText("RSSI : " + rssi_ + "dBm");
-                BearingActivity.tv_center_tx.setText("TX : " + tx_);
+            if(deviceName.equals("MI_SCALE")){
+                BearingActivity.tv_center_info.setText("POlar0:\n"+ rssi_ + "dBm\n" + tx_);
+//                BearingActivity.tv_center_rssi.setText("RSSI : " + rssi_ + "dBm");
+//                BearingActivity.tv_center_tx.setText("TX : " + tx_);
             }
             else{ // For POlar1,2,3,4
                 switch(AntValue){
-                    case '1': // East
+                    case EAST: // East
                         BearingActivity.tv_east_title.setText(deviceName);
-                        BearingActivity.tv_east_rssi.setText("RSSI : " + rssi_ + "dBm");
-                        BearingActivity.tv_east_tx.setText("TX : " + tx_);
+                        BearingActivity.tv_east_info.setText("POlar0:\n"+ rssi_ + "dBm\n" + tx_);
+//                        BearingActivity.tv_east_rssi.setText("RSSI : " + rssi_ + "dBm");
+//                        BearingActivity.tv_east_tx.setText("TX : " + tx_);
                         break;
-                    case '2': // West
+                    case WEST: // West
                         BearingActivity.tv_west_title.setText(deviceName);
-                        BearingActivity.tv_west_rssi.setText("RSSI : " + rssi_ + "dBm");
-                        BearingActivity.tv_west_tx.setText("TX : " + tx_);
+                        BearingActivity.tv_west_info.setText("POlar0:\n"+ rssi_ + "dBm\n" + tx_);
+//                        BearingActivity.tv_west_rssi.setText("RSSI : " + rssi_ + "dBm");
+//                        BearingActivity.tv_west_tx.setText("TX : " + tx_);
                         break;
-                    case '3': // South
+                    case SOUTH: // South
                         BearingActivity.tv_south_title.setText(deviceName);
-                        BearingActivity.tv_south_rssi.setText("RSSI : " + rssi_ + "dBm");
-                        BearingActivity.tv_south_tx.setText("TX : " + tx_);
+                        BearingActivity.tv_south_info.setText("POlar0:\n"+ rssi_ + "dBm\n" + tx_);
+//                        BearingActivity.tv_south_rssi.setText("RSSI : " + rssi_ + "dBm");
+//                        BearingActivity.tv_south_tx.setText("TX : " + tx_);
                         break;
-                    case '4': // North
+                    case NORTH: // North
                         BearingActivity.tv_north_title.setText(deviceName);
-                        BearingActivity.tv_north_rssi.setText("RSSI : " + rssi_ + "dBm");
-                        BearingActivity.tv_north_tx.setText("TX : " + tx_);
+                        BearingActivity.tv_north_info.setText("POlar0: "+ rssi_ + "dBm, " + tx_);
+//                        BearingActivity.tv_north_rssi.setText("RSSI : " + rssi_ + "dBm");
+//                        BearingActivity.tv_north_tx.setText("TX : " + tx_);
                         break;
                 } //switch
             } //else

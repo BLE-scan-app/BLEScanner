@@ -19,7 +19,7 @@
     <string name="local_service_stopped">broadcast service stopped</string>
     <string name="local_service_started">broadcast service started</string>
     <string name="local_service_label">broadcast service notification</string>
-
+    <string name="ble_not_supported">BLE is not supported</string>
 
 
 </resources>

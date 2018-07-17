@@ -33,25 +33,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="#b0b0b0"
-                    android:paddingHorizontal="4dp"
                     android:gravity="center_horizontal"
-                    android:text="POlar 1"
-                    android:textSize="20dp" />
+                    android:paddingHorizontal="4dp"
+                    android:text="NORTH"
+                    android:textSize="40dp" />
 
                 <TextView
-                    android:id="@+id/north_rssi"
+                    android:id="@+id/north_info"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:text="RSSI value "
-                    android:textSize="10dp" />
-                <TextView
-                    android:id="@+id/north_tx"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:text="Tx value "
-                    android:textSize="10dp" />
+                    android:text="POlar0:\nxx dbm\nTx"
+                    android:textSize="30dp" />
+                <!--<TextView-->
+                    <!--android:id="@+id/north_tx"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:gravity="center_horizontal"-->
+                    <!--android:text="Tx value "-->
+                    <!--android:textSize="10dp" />-->
 
             </LinearLayout>
         </TableRow>
@@ -77,23 +77,23 @@
                     android:background="#b0b0b0"
                     android:gravity="center_horizontal"
                     android:paddingHorizontal="4dp"
-                    android:text="POlar 2"
-                    android:textSize="20dp" />
+                    android:text="WEST"
+                    android:textSize="40dp" />
 
                 <TextView
-                    android:id="@+id/west_rssi"
+                    android:id="@+id/west_info"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:text="RSSI value "
-                    android:textSize="10dp" />
-                <TextView
-                    android:id="@+id/west_tx"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:text="Tx value "
-                    android:textSize="10dp" />
+                    android:text="POlar0:\nxx dbm\nTx"
+                    android:textSize="30dp" />
+                <!--<TextView-->
+                    <!--android:id="@+id/west_tx"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:gravity="center_horizontal"-->
+                    <!--android:text="Tx value "-->
+                    <!--android:textSize="10dp" />-->
 
             </LinearLayout>
 
@@ -112,23 +112,23 @@
                     android:background="#b0b0b0"
                     android:gravity="center_horizontal"
                     android:paddingHorizontal="4dp"
-                    android:text="POlar 0"
-                    android:textSize="20dp" />
+                    android:text="POlar0"
+                    android:textSize="40dp" />
 
                 <TextView
-                    android:id="@+id/center_rssi"
+                    android:id="@+id/center_info"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:text="RSSI value "
-                    android:textSize="10dp" />
-                <TextView
-                    android:id="@+id/center_tx"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:text="Tx value "
-                    android:textSize="10dp" />
+                    android:text="POlar0:\nxx dbm\nTx"
+                    android:textSize="30dp" />
+                <!--<TextView-->
+                    <!--android:id="@+id/center_tx"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:gravity="center_horizontal"-->
+                    <!--android:text="Tx value "-->
+                    <!--android:textSize="10dp" />-->
 
 
             </LinearLayout>
@@ -148,23 +148,23 @@
                     android:background="#b0b0b0"
                     android:gravity="center_horizontal"
                     android:paddingHorizontal="4dp"
-                    android:text="POlar 3"
-                    android:textSize="20dp" />
+                    android:text="EAST"
+                    android:textSize="40dp" />
 
                 <TextView
-                    android:id="@+id/east_rssi"
+                    android:id="@+id/east_info"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:text="RSSI value "
-                    android:textSize="10dp" />
-                <TextView
-                    android:id="@+id/east_tx"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:text="Tx value "
-                    android:textSize="10dp" />
+                    android:text="POlar0:\nxx dbm\nTx"
+                    android:textSize="30dp" />
+                <!--<TextView-->
+                    <!--android:id="@+id/east_tx"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:gravity="center_horizontal"-->
+                    <!--android:text="Tx value "-->
+                    <!--android:textSize="10dp" />-->
 
             </LinearLayout>
 
@@ -191,24 +191,24 @@
                     android:background="#b0b0b0"
                     android:gravity="center_horizontal"
                     android:paddingHorizontal="4dp"
-                    android:text="POlar 4"
-                    android:textSize="20dp" />
+                    android:text="SOUTH"
+                    android:textSize="40dp" />
 
                 <TextView
-                    android:id="@+id/south_rssi"
+                    android:id="@+id/south_info"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:text="RSSI value "
-                    android:textSize="10dp" />
+                    android:text="POlar0:\nxx dbm\nTx"
+                    android:textSize="30dp" />
 
-                <TextView
-                    android:id="@+id/south_tx"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:text="Tx value "
-                    android:textSize="10dp" />
+                <!--<TextView-->
+                    <!--android:id="@+id/south_tx"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:gravity="center_horizontal"-->
+                    <!--android:text="Tx value "-->
+                    <!--android:textSize="10dp" />-->
 
             </LinearLayout>
 

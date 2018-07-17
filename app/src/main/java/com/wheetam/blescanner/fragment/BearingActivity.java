@@ -13,25 +13,30 @@ import com.wheetam.blescanner.R;
 
 public class BearingActivity extends Fragment{
 
-    private final String TXT_POLAR = "POlar ";
+    private final String TXT_POLAR = "POlar";
 
     public static TextView tv_north_title;
+    public static TextView tv_north_info;
     public static TextView tv_north_rssi;
     public static TextView tv_north_tx;
 
     public static TextView tv_south_title;
+    public static TextView tv_south_info;
     public static TextView tv_south_rssi;
     public static TextView tv_south_tx;
 
     public static TextView tv_east_title;
+    public static TextView tv_east_info;
     public static TextView tv_east_rssi;
     public static TextView tv_east_tx;
 
     public static TextView tv_west_title;
+    public static TextView tv_west_info;
     public static TextView tv_west_rssi;
     public static TextView tv_west_tx;
 
     public static TextView tv_center_title;
+    public static TextView tv_center_info;
     public static TextView tv_center_rssi;
     public static TextView tv_center_tx;
 
@@ -50,28 +55,33 @@ public class BearingActivity extends Fragment{
 
         // North
         tv_north_title = (TextView)rootView.findViewById(R.id.north);
-        tv_north_rssi = (TextView)rootView.findViewById(R.id.north_rssi);
-        tv_north_tx = (TextView)rootView.findViewById(R.id.north_tx);
+        tv_north_info = (TextView)rootView.findViewById(R.id.north_info);
+//        tv_north_rssi = (TextView)rootView.findViewById(R.id.north_rssi);
+//        tv_north_tx = (TextView)rootView.findViewById(R.id.north_tx);
 
         // South
         tv_south_title = (TextView)rootView.findViewById(R.id.south);
-        tv_south_rssi = (TextView)rootView.findViewById(R.id.south_rssi);
-        tv_south_tx = (TextView)rootView.findViewById(R.id.south_tx);
+        tv_south_info = (TextView)rootView.findViewById(R.id.south_info);
+//        tv_south_rssi = (TextView)rootView.findViewById(R.id.south_rssi);
+//        tv_south_tx = (TextView)rootView.findViewById(R.id.south_tx);
 
         // East
         tv_east_title = (TextView)rootView.findViewById(R.id.east);
-        tv_east_rssi = (TextView)rootView.findViewById(R.id.east_rssi);
-        tv_east_tx = (TextView)rootView.findViewById(R.id.east_tx);
+        tv_east_info = (TextView)rootView.findViewById(R.id.east_info);
+//        tv_east_rssi = (TextView)rootView.findViewById(R.id.east_rssi);
+//        tv_east_tx = (TextView)rootView.findViewById(R.id.east_tx);
 
         // West
         tv_west_title = (TextView)rootView.findViewById(R.id.west);
-        tv_west_rssi = (TextView)rootView.findViewById(R.id.west_rssi);
-        tv_west_tx = (TextView)rootView.findViewById(R.id.west_tx);
+        tv_west_info = (TextView)rootView.findViewById(R.id.west_info);
+//        tv_west_rssi = (TextView)rootView.findViewById(R.id.west_rssi);
+//        tv_west_tx = (TextView)rootView.findViewById(R.id.west_tx);
 
         // Center
         tv_center_title = (TextView)rootView.findViewById(R.id.center);
-        tv_center_rssi = (TextView)rootView.findViewById(R.id.center_rssi);
-        tv_center_tx = (TextView)rootView.findViewById(R.id.center_tx);
+        tv_center_info = (TextView)rootView.findViewById(R.id.center_info);
+//        tv_center_rssi = (TextView)rootView.findViewById(R.id.center_rssi);
+//        tv_center_tx = (TextView)rootView.findViewById(R.id.center_tx);
 
         return rootView;
     }
