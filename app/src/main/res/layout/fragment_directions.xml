@@ -43,7 +43,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:text="POlar0:\nxx dbm\nTx"
+                    android:text="POlar0:\ndbm\nTx"
                     android:textSize="30dp" />
                 <!--<TextView-->
                     <!--android:id="@+id/north_tx"-->
@@ -85,7 +85,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:text="POlar0:\nxx dbm\nTx"
+                    android:text="POlar0:\ndbm\nTx"
                     android:textSize="30dp" />
                 <!--<TextView-->
                     <!--android:id="@+id/west_tx"-->
@@ -120,7 +120,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:text="POlar0:\nxx dbm\nTx"
+                    android:text="POlar0:\ndbm\nTx"
                     android:textSize="30dp" />
                 <!--<TextView-->
                     <!--android:id="@+id/center_tx"-->
@@ -156,7 +156,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:text="POlar0:\nxx dbm\nTx"
+                    android:text="POlar0:\ndbm\nTx"
                     android:textSize="30dp" />
                 <!--<TextView-->
                     <!--android:id="@+id/east_tx"-->
@@ -199,7 +199,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:text="POlar0:\nxx dbm\nTx"
+                    android:text="POlar0:\ndbm\nTx"
                     android:textSize="30dp" />
 
                 <!--<TextView-->

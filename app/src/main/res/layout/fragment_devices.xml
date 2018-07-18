@@ -7,22 +7,31 @@
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity$PlaceholderFragment">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_view"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:animateLayoutChanges="false"
-        android:scrollbars="vertical"
-        android:visibility="visible" >
+        android:orientation="vertical">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="7"
+            android:animateLayoutChanges="false"
+            android:scrollbars="vertical"
+            android:visibility="visible">
 
 
-    </android.support.v7.widget.RecyclerView>
+        </android.support.v7.widget.RecyclerView>
 
-    <Button
-        android:id="@+id/scan_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Scan"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        <Button
+            android:id="@+id/scan_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Scan"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
