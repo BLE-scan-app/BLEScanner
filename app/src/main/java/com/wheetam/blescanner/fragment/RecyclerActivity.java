@@ -46,14 +46,16 @@ public class RecyclerActivity extends Fragment implements SimpleScanCallback{
     private static final char NORTH = '4';
     private static final char EAST = '5';
 
+    private char[] old_ant;
+
     Recycler_items sAdapter;
     List<BLEDevice> mDevices = new ArrayList<BLEDevice>();
     Map<String, BLEDevice> deviceMap = new HashMap<>();
 
     private Handler mHandler;
     private BleScanner mBleScanner;
-    // Stops scanning after 30 minutes. / 5 seconds.
-    private static final long SCAN_PERIOD = 15 * 1000;
+    // Stops scanning after 5 minutes
+    private static final long SCAN_PERIOD = 300 * 1000;
     private boolean mScanning = false;
 
     RecyclerView rvDevices;
@@ -67,6 +69,8 @@ public class RecyclerActivity extends Fragment implements SimpleScanCallback{
 
         mHandler = new Handler();
         sAdapter = new Recycler_items(getActivity().getApplicationContext(), mDevices);
+
+        old_ant = new char[5];
 
         setRetainInstance(true);
     }
@@ -179,29 +183,81 @@ public class RecyclerActivity extends Fragment implements SimpleScanCallback{
         String deviceName=device.getName();
         String dataForBearing = d.getResData();   // BearingActivity로 보낼 문자열
 
+        char getOldAnt = ' ';
+        char AntValue = dataForBearing.charAt(IDX_ANT+1);
+        String rssi_ = ""+dataForBearing.charAt(IDX_RSSI)+dataForBearing.charAt(IDX_RSSI+1);
+        String tx_ = ""+dataForBearing.charAt(IDX_TX)+dataForBearing.charAt(IDX_TX+1);
+
         // device name filtering
         if(deviceName != null && deviceName.contains("")){
             // POlar를 포함한 이름을 가진 디바이스만 recycler view에 추가
+
+            // list에 추가
             if (!deviceMap.containsKey(deviceName)) {
+                // 안테나 값 old_ant에 저장하는 부분
+                if(deviceName.contains("1"))
+                    old_ant[1] = AntValue;
+                else if(deviceName.contains("2"))
+                    old_ant[2] = AntValue;
+                else if(deviceName.contains("3"))
+                    old_ant[3] = AntValue;
+                else if(deviceName.contains("4"))
+                    old_ant[4] = AntValue;
+
+                getOldAnt = ' ';
+
                 deviceMap.put(deviceName, d);
                 mDevices.add(d);
                 sAdapter.notifyDataSetChanged();
-            } else {
-                //in 15 seconds the rssi can change
+            } else {  // list에 이미 존재할 경우
+                // 해당 deviceName의 이전 ANT 값 가져오기
+                if(deviceName.contains("1"))
+                    getOldAnt = old_ant[1];
+                else if(deviceName.contains("2"))
+                    getOldAnt = old_ant[2];
+                else if(deviceName.contains("3"))
+                    getOldAnt = old_ant[3];
+                else if(deviceName.contains("4"))
+                    getOldAnt = old_ant[4];
+
+                int pos = mDevices.indexOf(deviceMap.get(deviceName));
+                //Log.i("for_checking",mDevices.indexOf(deviceMap.get(deviceName))+"");
                 mDevices.remove(deviceMap.get(deviceName));
                 deviceMap.put(deviceName, d);
-                mDevices.add(d);
+
+                mDevices.add(pos, d); // 같은 위치에 다시 추가하기
+                //mDevices.add(d);
                 sAdapter.notifyDataSetChanged();
             }
 
-            char AntValue = dataForBearing.charAt(IDX_ANT+1);
-            String rssi_ = ""+dataForBearing.charAt(IDX_RSSI)+dataForBearing.charAt(IDX_RSSI+1);
-            String tx_ = ""+dataForBearing.charAt(IDX_TX)+dataForBearing.charAt(IDX_TX+1);
+            // 이전 ANT 값 변수에 공백이 들어있으면 새로 추가되는 것 / 아니면 기존 것 삭제 작업
+            if(getOldAnt != ' '){
+                switch(getOldAnt){
+                    case EAST: // East
+                        BearingActivity.tv_east_title.setText("");
+                        BearingActivity.tv_east_info.setText("");
+                        break;
+                    case WEST: // West
+                        BearingActivity.tv_west_title.setText("");
+                        BearingActivity.tv_west_info.setText("");
+                        break;
+                    case SOUTH: // South
+                        BearingActivity.tv_south_title.setText("");
+                        BearingActivity.tv_south_info.setText("");
+                        break;
+                    case NORTH: // North
+                        BearingActivity.tv_north_title.setText("");
+                        BearingActivity.tv_north_info.setText("");
+                        break;
+                }
+            }
 
             // Set center first
             // 데이터를 bearing activity에도 추가 (rssi, tx)
             if(deviceName.equals("MI_SCALE")){
-                BearingActivity.tv_center_info.setText("POlar0:\n"+ rssi_ + "dBm\n" + tx_);
+                BearingActivity.tv_center_info.setText("POlar0:\n"
+                        + Integer.parseInt(rssi_, 16) + "dBm\n"
+                        + Integer.parseInt(tx_, 16));
 //                BearingActivity.tv_center_rssi.setText("RSSI : " + rssi_ + "dBm");
 //                BearingActivity.tv_center_tx.setText("TX : " + tx_);
             }
@@ -209,25 +265,33 @@ public class RecyclerActivity extends Fragment implements SimpleScanCallback{
                 switch(AntValue){
                     case EAST: // East
                         BearingActivity.tv_east_title.setText(deviceName);
-                        BearingActivity.tv_east_info.setText("POlar0:\n"+ rssi_ + "dBm\n" + tx_);
+                        BearingActivity.tv_east_info.setText("POlar0:\n"
+                                + Integer.parseInt(rssi_, 16) + "dBm\n"
+                                + Integer.parseInt(tx_, 16));
 //                        BearingActivity.tv_east_rssi.setText("RSSI : " + rssi_ + "dBm");
 //                        BearingActivity.tv_east_tx.setText("TX : " + tx_);
                         break;
                     case WEST: // West
                         BearingActivity.tv_west_title.setText(deviceName);
-                        BearingActivity.tv_west_info.setText("POlar0:\n"+ rssi_ + "dBm\n" + tx_);
+                        BearingActivity.tv_west_info.setText("POlar0:\n"
+                                + Integer.parseInt(rssi_, 16) + "dBm\n"
+                                + Integer.parseInt(tx_, 16));
 //                        BearingActivity.tv_west_rssi.setText("RSSI : " + rssi_ + "dBm");
 //                        BearingActivity.tv_west_tx.setText("TX : " + tx_);
                         break;
                     case SOUTH: // South
                         BearingActivity.tv_south_title.setText(deviceName);
-                        BearingActivity.tv_south_info.setText("POlar0:\n"+ rssi_ + "dBm\n" + tx_);
+                        BearingActivity.tv_south_info.setText("POlar0:\n"
+                                + Integer.parseInt(rssi_, 16) + "dBm\n"
+                                + Integer.parseInt(tx_, 16));
 //                        BearingActivity.tv_south_rssi.setText("RSSI : " + rssi_ + "dBm");
 //                        BearingActivity.tv_south_tx.setText("TX : " + tx_);
                         break;
                     case NORTH: // North
                         BearingActivity.tv_north_title.setText(deviceName);
-                        BearingActivity.tv_north_info.setText("POlar0: "+ rssi_ + "dBm, " + tx_);
+                        BearingActivity.tv_north_info.setText("POlar0: "
+                                + Integer.parseInt(rssi_, 16) + "dBm, "
+                                + Integer.parseInt(tx_, 16));
 //                        BearingActivity.tv_north_rssi.setText("RSSI : " + rssi_ + "dBm");
 //                        BearingActivity.tv_north_tx.setText("TX : " + tx_);
                         break;
@@ -236,6 +300,10 @@ public class RecyclerActivity extends Fragment implements SimpleScanCallback{
         } // if - POlar text filter
 
     } // onBleScan method
+
+    public void clearBearing(){
+
+    }
 
     @Override
     public void onBleScanFailed(BleScanState scanState) {

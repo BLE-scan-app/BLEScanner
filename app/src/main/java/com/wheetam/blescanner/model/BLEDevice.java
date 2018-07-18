@@ -57,12 +57,14 @@ public class BLEDevice {
 //            chosenData += resData[k];
 //        }
 
+        String rssi_ = Character.toString(resData[IDX_RSSI]) + Character.toString(resData[IDX_RSSI+1]);
+        String tx_ = Character.toString(resData[IDX_TX]) + Character.toString(resData[IDX_TX+1]);
 
         chosenData += "\nANT : "+resData[IDX_ANT]+resData[IDX_ANT+1]
-                + "\nRSSI : "+resData[IDX_RSSI]+resData[IDX_RSSI+1]+"dBm"
+                + "\nRSSI : "+Integer.parseInt(rssi_, 16)+"dBm"
                 + "\nX : "+resData[IDX_X1]+resData[IDX_X1+1] + "\t\tY : "+resData[IDX_Y1]+resData[IDX_Y1+1] + "\t\tZ : "+resData[IDX_Z1]+resData[IDX_Z1+1]
                 + "\nX : "+resData[IDX_X2]+resData[IDX_X2+1] + "\t\tY : "+resData[IDX_Y2]+resData[IDX_Y2+1] + "\t\tZ : "+resData[IDX_Z2]+resData[IDX_Z2+1]
-                + "\nTX : "+resData[IDX_TX]+resData[IDX_TX+1];
+                + "\nTX : "+Integer.parseInt(tx_, 16);
 
 
 
