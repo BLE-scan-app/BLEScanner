@@ -34,14 +34,13 @@
                     android:layout_height="wrap_content"
                     android:background="#b0b0b0"
                     android:gravity="center_horizontal"
-                    android:paddingHorizontal="4dp"
-                    android:text="NORTH"
-                    android:textSize="40dp" />
+                    
+                    android:textSize="35dp" />
 
                 <TextView
                     android:id="@+id/north_info"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:gravity="center_horizontal"
                     android:text="POlar0:\ndbm\nTx"
                     android:textSize="30dp" />
@@ -76,9 +75,8 @@
                     android:layout_height="wrap_content"
                     android:background="#b0b0b0"
                     android:gravity="center_horizontal"
-                    android:paddingHorizontal="4dp"
-                    android:text="WEST"
-                    android:textSize="40dp" />
+                    
+                    android:textSize="35dp" />
 
                 <TextView
                     android:id="@+id/west_info"
@@ -111,9 +109,8 @@
                     android:layout_gravity="center_horizontal"
                     android:background="#b0b0b0"
                     android:gravity="center_horizontal"
-                    android:paddingHorizontal="4dp"
-                    android:text="POlar0"
-                    android:textSize="40dp" />
+                    
+                    android:textSize="35dp" />
 
                 <TextView
                     android:id="@+id/center_info"
@@ -147,9 +144,8 @@
                     android:layout_height="wrap_content"
                     android:background="#b0b0b0"
                     android:gravity="center_horizontal"
-                    android:paddingHorizontal="4dp"
-                    android:text="EAST"
-                    android:textSize="40dp" />
+                    
+                    android:textSize="35dp" />
 
                 <TextView
                     android:id="@+id/east_info"
@@ -190,9 +186,9 @@
                     android:layout_height="wrap_content"
                     android:background="#b0b0b0"
                     android:gravity="center_horizontal"
-                    android:paddingHorizontal="4dp"
-                    android:text="SOUTH"
-                    android:textSize="40dp" />
+                    
+                    android:text=""
+                    android:textSize="35dp" />
 
                 <TextView
                     android:id="@+id/south_info"
