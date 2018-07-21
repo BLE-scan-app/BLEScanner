@@ -38,7 +38,7 @@ public class LollipopBleScanner extends BleScanner.BaseBleScanner {
     @SuppressWarnings(value = {"deprecation"})
     @Override
     public void onStartBleScan(long timeoutMillis) {
-        long delay = timeoutMillis == 0 ? defaultTimeout : timeoutMillis;
+        //long delay = timeoutMillis == 0 ? defaultTimeout : timeoutMillis;
         if (mBluetoothScanner != null && mBluetoothAdapter != null && mBluetoothAdapter.isEnabled()) {
             try {
 
@@ -49,7 +49,7 @@ public class LollipopBleScanner extends BleScanner.BaseBleScanner {
                 isScanning = false;
                 Log.e(TAG, e.toString());
             }
-            timeoutHandler.postDelayed(timeoutRunnable, delay);
+            //timeoutHandler.postDelayed(timeoutRunnable, delay);
         } else {
             mScanCallback.onBleScanFailed(BleScanState.BLUETOOTH_OFF);
         }

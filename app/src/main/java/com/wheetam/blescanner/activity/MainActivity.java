@@ -1,7 +1,6 @@
 package com.wheetam.blescanner.activity;
 
 import android.Manifest;
-import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
@@ -325,6 +324,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+
+        Log.d("main_class", "onpause");
+
     }
 
     /**

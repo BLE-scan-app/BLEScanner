@@ -46,10 +46,10 @@ public class JellyBeanBleScanner extends BleScanner.BaseBleScanner {
     @SuppressWarnings(value = {"deprecation"})
     @Override
     public void onStartBleScan(long timeoutMillis) {
-        long delay = timeoutMillis == 0 ? defaultTimeout : timeoutMillis;
+        //long delay = timeoutMillis == 0 ? defaultTimeout : timeoutMillis;
         if (mBluetooth != null) {
             isScanning = mBluetooth.startLeScan(leScanCallback);
-            timeoutHandler.postDelayed(timeoutRunnable, delay);
+            //timeoutHandler.postDelayed(timeoutRunnable, delay);
             Log.d(TAG, "mBluetooth.startLeScan() " + isScanning);
         } else {
             mScanCallback.onBleScanFailed(BleScanState.BLUETOOTH_OFF);//bluetooth is off

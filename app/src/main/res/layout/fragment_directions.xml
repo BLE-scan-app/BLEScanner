@@ -11,156 +11,192 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:stretchColumns="*">
+        android:stretchColumns="*"
+        android:weightSum="3"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center">
 
         <TableRow
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@drawable/stroke"
+            android:weightSum="1">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_column="0" />
+
+            <LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
                 android:layout_column="1"
                 android:layout_gravity="center_vertical"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
+                android:background="@drawable/stroke"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="vertical"
+                android:weightSum="1">
 
                 <TextView
                     android:id="@+id/north"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="#b0b0b0"
-                    android:gravity="center_horizontal"
-                    
-                    android:textSize="35dp" />
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_weight="0.7"
+                    android:background="#D7D7D7"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:textSize="35dp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/north_info"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_weight="0.3"
                     android:gravity="center_horizontal"
-                    android:text="POlar0:\ndbm\nTx"
                     android:textSize="30dp" />
                 <!--<TextView-->
-                    <!--android:id="@+id/north_tx"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:gravity="center_horizontal"-->
-                    <!--android:text="Tx value "-->
-                    <!--android:textSize="10dp" />-->
+                <!--android:id="@+id/north_tx"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center_horizontal"-->
+                <!--android:text="Tx value "-->
+                <!--android:textSize="10dp" />-->
 
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_column="2" />
         </TableRow>
 
 
         <TableRow
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="3">
+            android:layout_weight="1"
+            android:background="@drawable/stroke_lr"
+            android:weightSum="1">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_column="0"
                 android:layout_gravity="center_vertical"
                 android:gravity="center_horizontal"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:weightSum="1">
 
                 <TextView
                     android:id="@+id/west"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="#b0b0b0"
-                    android:gravity="center_horizontal"
-                    
-                    android:textSize="35dp" />
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="0.7"
+                    android:background="#D7D7D7"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:textSize="35dp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/west_info"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.3"
                     android:gravity="center_horizontal"
-                    android:text="POlar0:\ndbm\nTx"
                     android:textSize="30dp" />
                 <!--<TextView-->
-                    <!--android:id="@+id/west_tx"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:gravity="center_horizontal"-->
-                    <!--android:text="Tx value "-->
-                    <!--android:textSize="10dp" />-->
+                <!--android:id="@+id/west_tx"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center_horizontal"-->
+                <!--android:text="Tx value "-->
+                <!--android:textSize="10dp" />-->
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_column="1"
                 android:layout_gravity="center_vertical"
-                android:orientation="vertical">
+                android:background="@drawable/stroke_lr"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:weightSum="1">
 
                 <TextView
                     android:id="@+id/center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
-                    android:background="#b0b0b0"
-                    android:gravity="center_horizontal"
-                    
-                    android:textSize="35dp" />
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="0.7"
+                    android:background="#D7D7D7"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:textSize="35dp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/center_info"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.3"
                     android:gravity="center_horizontal"
-                    android:text="POlar0:\ndbm\nTx"
                     android:textSize="30dp" />
                 <!--<TextView-->
-                    <!--android:id="@+id/center_tx"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:gravity="center_horizontal"-->
-                    <!--android:text="Tx value "-->
-                    <!--android:textSize="10dp" />-->
+                <!--android:id="@+id/center_tx"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center_horizontal"-->
+                <!--android:text="Tx value "-->
+                <!--android:textSize="10dp" />-->
 
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
                 android:layout_column="2"
                 android:layout_gravity="center_vertical"
                 android:gravity="center_horizontal"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:weightSum="1">
 
                 <TextView
                     android:id="@+id/east"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="#b0b0b0"
-                    android:gravity="center_horizontal"
-                    
-                    android:textSize="35dp" />
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="0.7"
+                    android:background="#D7D7D7"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:textSize="35dp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/east_info"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.3"
                     android:gravity="center_horizontal"
-                    android:text="POlar0:\ndbm\nTx"
                     android:textSize="30dp" />
                 <!--<TextView-->
-                    <!--android:id="@+id/east_tx"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:gravity="center_horizontal"-->
-                    <!--android:text="Tx value "-->
-                    <!--android:textSize="10dp" />-->
+                <!--android:id="@+id/east_tx"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center_horizontal"-->
+                <!--android:text="Tx value "-->
+                <!--android:textSize="10dp" />-->
 
             </LinearLayout>
 
@@ -168,46 +204,62 @@
 
 
         <TableRow
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@drawable/stroke"
+            android:weightSum="1">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_column="0" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_column="1"
                 android:layout_gravity="center_vertical"
+                android:background="@drawable/stroke"
                 android:gravity="center_horizontal"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:weightSum="1">
 
                 <TextView
                     android:id="@+id/south"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="#b0b0b0"
-                    android:gravity="center_horizontal"
-                    
-                    android:text=""
-                    android:textSize="35dp" />
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_weight="0.7"
+                    android:background="#D7D7D7"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:textSize="35dp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/south_info"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.3"
                     android:gravity="center_horizontal"
-                    android:text="POlar0:\ndbm\nTx"
                     android:textSize="30dp" />
 
                 <!--<TextView-->
-                    <!--android:id="@+id/south_tx"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:gravity="center_horizontal"-->
-                    <!--android:text="Tx value "-->
-                    <!--android:textSize="10dp" />-->
+                <!--android:id="@+id/south_tx"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center_horizontal"-->
+                <!--android:text="Tx value "-->
+                <!--android:textSize="10dp" />-->
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_column="2" />
         </TableRow>
     </TableLayout>
 

@@ -86,6 +86,24 @@ public class BearingActivity extends Fragment{
         return rootView;
     }
 
+    public static void clearText(){
+        tv_north_title.setText("");
+        tv_north_info.setText("");
+
+        tv_south_title.setText("");
+        tv_south_info.setText("");
+
+        tv_east_title.setText("");
+        tv_east_info.setText("");
+
+        tv_west_title.setText("");
+        tv_west_info.setText("");
+
+        tv_center_title.setText("");
+        tv_center_info.setText("");
+    }
+
+
 //    public static void setTitle(String title){
 //        tv_north_title.setText(title);
 //    }

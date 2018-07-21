@@ -33,7 +33,7 @@ public class BleScanner {
     }
 
     public abstract static class BaseBleScanner {
-        public final static long defaultTimeout = 300 *1000;
+        //public final static long defaultTimeout = 1800 *1000;
         public boolean isScanning;
 
         public abstract void onStartBleScan();
@@ -43,13 +43,13 @@ public class BleScanner {
 
         public abstract void onBleScanFailed(BleScanState scanState);
 
-        protected Handler timeoutHandler  = new Handler();
-        protected Runnable timeoutRunnable = new Runnable() {
-            @Override
-            public void run() {
-                onStopBleScan();
-                onBleScanFailed(BleScanState.SCAN_TIMEOUT);
-            }
-        };
+        //protected Handler timeoutHandler  = new Handler();
+//        protected Runnable timeoutRunnable = new Runnable() {
+//            @Override
+//            public void run() {
+//                onStopBleScan();
+//                onBleScanFailed(BleScanState.SCAN_TIMEOUT);
+//            }
+//        };
     }
 }
