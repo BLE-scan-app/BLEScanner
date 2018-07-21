@@ -189,7 +189,7 @@ public class RecyclerActivity extends Fragment implements SimpleScanCallback{
         String tx_ = ""+dataForBearing.charAt(IDX_TX)+dataForBearing.charAt(IDX_TX+1);
 
         // device name filtering
-        if(deviceName != null && deviceName.contains("")){
+        if(deviceName != null && deviceName.contains("POlar")){
             // POlar를 포함한 이름을 가진 디바이스만 recycler view에 추가
 
             // list에 추가
@@ -254,7 +254,8 @@ public class RecyclerActivity extends Fragment implements SimpleScanCallback{
 
             // Set center first
             // 데이터를 bearing activity에도 추가 (rssi, tx)
-            if(deviceName.equals("MI_SCALE")){
+            if(deviceName.equals("POlar0")){
+                BearingActivity.tv_center_title.setText(deviceName);
                 BearingActivity.tv_center_info.setText("POlar0:\n"
                         + Integer.parseInt(rssi_, 16) + "dBm\n"
                         + Integer.parseInt(tx_, 16));
