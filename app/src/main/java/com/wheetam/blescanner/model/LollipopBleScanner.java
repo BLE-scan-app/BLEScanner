@@ -5,6 +5,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.le.BluetoothLeScanner;
 import android.bluetooth.le.ScanCallback;
 import android.bluetooth.le.ScanResult;
+import android.bluetooth.le.ScanSettings;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
@@ -21,6 +22,7 @@ public class LollipopBleScanner extends BleScanner.BaseBleScanner {
     private BluetoothLeScanner mBluetoothScanner = null;
     private BluetoothAdapter mBluetoothAdapter = null;
     private SimpleScanCallback mScanCallback = null;
+    private ScanSettings.Builder mScanSettings = null;
 
 
     public LollipopBleScanner(SimpleScanCallback callback) {
@@ -41,8 +43,12 @@ public class LollipopBleScanner extends BleScanner.BaseBleScanner {
         //long delay = timeoutMillis == 0 ? defaultTimeout : timeoutMillis;
         if (mBluetoothScanner != null && mBluetoothAdapter != null && mBluetoothAdapter.isEnabled()) {
             try {
+                mScanSettings = new ScanSettings.Builder();
+                mScanSettings.setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY);
+                ScanSettings scanSettings = mScanSettings.build();
 
-                mBluetoothScanner.startScan(scanCallback);
+                mBluetoothScanner.startScan(null, scanSettings, scanCallback);
+                Log.i("lollipop_ver","Low latency mode on");
                 //mBluetoothScanner.startScan(scanCallback);
                 isScanning = true;
             } catch (Exception e) {
@@ -61,9 +67,12 @@ public class LollipopBleScanner extends BleScanner.BaseBleScanner {
     public void onStartBleScan() {
         if (mBluetoothScanner != null && mBluetoothAdapter != null && mBluetoothAdapter.isEnabled()) {
             try {
+                mScanSettings = new ScanSettings.Builder();
+                mScanSettings.setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY);
+                ScanSettings scanSettings = mScanSettings.build();
 
-                mBluetoothScanner.startScan(scanCallback);
-                //mBluetoothScanner.startScan(scanCallback);
+                mBluetoothScanner.startScan(null, scanSettings, scanCallback);
+                Log.i("lollipop_ver","Low latency mode on 222");
                 isScanning = true;
             } catch (Exception e) {
                 isScanning = false;
