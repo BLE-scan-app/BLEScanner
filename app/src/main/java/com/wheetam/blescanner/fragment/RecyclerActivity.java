@@ -43,8 +43,8 @@ public class RecyclerActivity extends Fragment implements SimpleScanCallback{
     // For ANT value filtering (Bearing)
     private static final char WEST = '0';
     private static final char SOUTH = '1';
-    private static final char NORTH = '4';
-    private static final char EAST = '5';
+    private static final char NORTH = '2';
+    private static final char EAST = '3';
 
     private char[] old_ant;
 
@@ -217,7 +217,7 @@ public class RecyclerActivity extends Fragment implements SimpleScanCallback{
         String tx_ = ""+dataForBearing.charAt(IDX_TX)+dataForBearing.charAt(IDX_TX+1);
 
         // device name filtering
-        if(deviceName != null && deviceName.contains("POlar")){
+        if(deviceName != null && deviceName.contains("Polar")){
             // POlar를 포함한 이름을 가진 디바이스만 recycler view에 추가
 
             // list에 추가
@@ -288,12 +288,10 @@ public class RecyclerActivity extends Fragment implements SimpleScanCallback{
 
             // Set center first
             // 데이터를 bearing activity에도 추가 (rssi, tx)
-            if(deviceName.equals("POlar0")){
+            if(deviceName.equals("Polar0")){
                 Log.i("ant refresh","set " + deviceName);
                 bearings.tv_center_title.setText(deviceName);
-                bearings.tv_center_info.setText("POlar0:\n"
-                        + Integer.parseInt(rssi_, 16) + "dBm\n"
-                        + Integer.parseInt(tx_, 16));
+                bearings.tv_center_info.setText("Tx: " + Integer.parseInt(tx_, 16));
 //                BearingActivity.tv_center_rssi.setText("RSSI : " + rssi_ + "dBm");
 //                BearingActivity.tv_center_tx.setText("TX : " + tx_);
             }
@@ -302,33 +300,33 @@ public class RecyclerActivity extends Fragment implements SimpleScanCallback{
                 switch(AntValue){
                     case EAST: // East
                         bearings.tv_east_title.setText(deviceName);
-                        bearings.tv_east_info.setText("POlar0:\n"
-                                + Integer.parseInt(rssi_, 16) + "dBm\n"
-                                + Integer.parseInt(tx_, 16));
+                        bearings.tv_east_info.setText("Polar0:\n"
+                                + "Rx: " + (Integer.parseInt(rssi_, 16)-100) + "dBm\n"
+                                + "Tx: " + Integer.parseInt(tx_, 16));
 //                        BearingActivity.tv_east_rssi.setText("RSSI : " + rssi_ + "dBm");
 //                        BearingActivity.tv_east_tx.setText("TX : " + tx_);
                         break;
                     case WEST: // West
                         bearings.tv_west_title.setText(deviceName);
-                        bearings.tv_west_info.setText("POlar0:\n"
-                                + Integer.parseInt(rssi_, 16) + "dBm\n"
-                                + Integer.parseInt(tx_, 16));
+                        bearings.tv_west_info.setText("Polar0:\n"
+                                + "Rx: " + (Integer.parseInt(rssi_, 16)-100) + "dBm\n"
+                                + "Tx: " + Integer.parseInt(tx_, 16));
 //                        BearingActivity.tv_west_rssi.setText("RSSI : " + rssi_ + "dBm");
 //                        BearingActivity.tv_west_tx.setText("TX : " + tx_);
                         break;
                     case SOUTH: // South
                         bearings.tv_south_title.setText(deviceName);
-                        bearings.tv_south_info.setText("POlar0:\n"
-                                + Integer.parseInt(rssi_, 16) + "dBm\n"
-                                + Integer.parseInt(tx_, 16));
+                        bearings.tv_south_info.setText("Polar0:\n"
+                                + "Rx: " + (Integer.parseInt(rssi_, 16)-100) + "dBm\n"
+                                + "Tx: " + Integer.parseInt(tx_, 16));
 //                        BearingActivity.tv_south_rssi.setText("RSSI : " + rssi_ + "dBm");
 //                        BearingActivity.tv_south_tx.setText("TX : " + tx_);
                         break;
                     case NORTH: // North
                         bearings.tv_north_title.setText(deviceName);
-                        bearings.tv_north_info.setText("POlar0:\n"
-                                + Integer.parseInt(rssi_, 16) + "dBm\n"
-                                + Integer.parseInt(tx_, 16));
+                        bearings.tv_north_info.setText("Polar0:\n"
+                                + "Rx: " + (Integer.parseInt(rssi_, 16)-100) + "dBm\n"
+                                + "Tx: " + Integer.parseInt(tx_, 16));
 //                        BearingActivity.tv_north_rssi.setText("RSSI : " + rssi_ + "dBm");
 //                        BearingActivity.tv_north_tx.setText("TX : " + tx_);
                         break;
