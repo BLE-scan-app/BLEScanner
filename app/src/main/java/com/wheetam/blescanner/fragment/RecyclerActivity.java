@@ -218,7 +218,7 @@ public class RecyclerActivity extends Fragment implements SimpleScanCallback{
 
         // device name filtering
         if(deviceName != null && deviceName.contains("Polar")){
-            // POlar를 포함한 이름을 가진 디바이스만 recycler view에 추가
+            // Polar를 포함한 이름을 가진 디바이스만 recycler view에 추가
 
             // list에 추가
             if (!deviceMap.containsKey(deviceName)) {
@@ -295,7 +295,7 @@ public class RecyclerActivity extends Fragment implements SimpleScanCallback{
 //                BearingActivity.tv_center_rssi.setText("RSSI : " + rssi_ + "dBm");
 //                BearingActivity.tv_center_tx.setText("TX : " + tx_);
             }
-            else{ // For POlar1,2,3,4
+            else{ // For Polar1,2,3,4
                 Log.i("ant refresh","set new " + deviceName + " at ant " + AntValue);
                 switch(AntValue){
                     case EAST: // East
